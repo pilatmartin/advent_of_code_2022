@@ -3,7 +3,7 @@ import Data.List
 
 main :: IO()
 main = do
-  s <- readFile "01_data.txt"
+  s <- readFile "data.txt"
   print $ "First: " ++ (show $ first s)
   print $ "Second: " ++ (show $ second s)
 
