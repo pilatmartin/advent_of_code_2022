@@ -1,3 +1,4 @@
+import Data.List
 import Data.List.Split
 
 lowerCaseOffset = 96
@@ -13,8 +14,9 @@ main = do
 getCompartments :: String -> (String, String)
 getCompartments backpack = let len = length backpack `div` 2
                            in (take len backpack, drop len backpack)  
+
 getSharedItem :: (String, String) -> Char
-getSharedItem ((a:as), b) = if a `elem` b then a else getSharedItem (as, b)
+getSharedItem (a, b) = (a `intersect` b) !! 0
 
 getItemPriority :: Char -> Int
 getItemPriority item = let ordItem = fromEnum item 
@@ -28,4 +30,4 @@ getGroupPriority :: [String] -> Int
 getGroupPriority [a,b,c] = getItemPriority $ getBadge (a, b, c)
 
 getBadge :: (String, String, String) -> Char
-getBadge ((a:as), b, c) = if a `elem` b && a `elem` c then a else getBadge (as, b, c)
+getBadge (a, b, c) = (a `intersect` b `intersect` c) !! 0
